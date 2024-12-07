@@ -2,7 +2,7 @@
 
 This script visualizes off-screen areas and entities in NES *Metroid*. It is compatible with the FCEUX, BizHawk, and Mesen emulators.
 
-All credit belongs to the original author, [@metalmachine76] (https://github.com/metalmachine76).
+All credit belongs to the original author, [@metalmachine76](https://github.com/metalmachine76).
 
 ## Features
 - Displays off-screen sections of the game world
