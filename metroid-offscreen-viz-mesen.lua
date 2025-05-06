@@ -1,4 +1,4 @@
--- Metroid off-screen visualization script v3.2
+﻿-- Metroid off-screen visualization script v3.2
 -- Works with FCEUX, BizHawk, and Mesen
 -- MetalMachine 2021 (Mesen support by Andypro 2024)
 
@@ -50,8 +50,14 @@ end
 if type(emu.getScriptDataFolder) == "function" then
     callbacksSupported = true
 
+	local consoleType = emu.getState()["consoleType"]
+
     function readbyte(address)
-		return emu.read(address, emu.memType.cpu, false)
+		if consoleType == "Nes" then
+			return emu.read(address, emu.memType.nesMemory, false)
+		elseif consoleType == "Snes" then
+			return emu.read(address, emu.memType.snesMemory, false)
+		end
 	end
 	
 	drawline = emu.drawLine
@@ -148,7 +154,6 @@ local function DrawNametable(nt, sx, sy, color_solid, color_break)
 			DrawTileRun(sx, sy, y, run_start, 31, color_solid)
 		end
 
-		
     end
 
 	local sam_nt = readbyte(0x030C)
@@ -159,7 +164,7 @@ local function DrawNametable(nt, sx, sy, color_solid, color_break)
 		local sam_rx = readbyte(0x0302)
 		local sam_sy = readbyte(0x030D)
 		local sam_sx = readbyte(0x030E)
-
+		
 		DrawEntityBox(sx, sy, sam_sx, sam_sy, sam_rx, sam_ry, colors.samus)
 	end
 
